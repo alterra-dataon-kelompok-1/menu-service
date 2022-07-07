@@ -1,6 +1,9 @@
 package dto
 
-import "math"
+import (
+	"math"
+	"time"
+)
 
 type Pagination struct {
 	Page     *int `query:"page" json:"page"`
@@ -17,6 +20,13 @@ type SearchGetRequest struct {
 type SearchGetResponse[T any] struct {
 	Datas          []T `json:"data"`
 	PaginationInfo PaginationInfo
+}
+
+type SearchGetMenuResponse struct {
+	Name        string    `json:"name"`
+	InStock     bool      `json:"in_stock"`
+	Description string    `json:"description"`
+	UpdatedAt   time.Time `json:"updated_at"`
 }
 
 type PaginationInfo struct {

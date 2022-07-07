@@ -35,7 +35,8 @@ func (p *menu) Find(ctx context.Context, payload *dto.SearchGetRequest, paginate
 	var menus []model.Menu
 	var count int64
 
-	query := p.Db.WithContext(ctx).Model(&model.Menu{})
+	// query := p.Db.WithContext(ctx).Model(&model.Menu{})
+	query := p.Db.Model(&model.Menu{})
 
 	if payload.Search != "" {
 		search := "%" + strings.ToLower(payload.Search) + "%"
@@ -48,8 +49,13 @@ func (p *menu) Find(ctx context.Context, payload *dto.SearchGetRequest, paginate
 	}
 
 	limit, offset := dto.GetLimitOffset(paginate)
+	// fmt.Println(limit, offset)
+	// fmt.Println(payload.Search)
 
-	err := query.Limit(limit).Offset(offset).Find(&menus).Error
+	result := query.Limit(limit).Offset(offset).Find(&menus)
+	err := result.Error
+	// fmt.Println(result.RowsAffected)
+	// fmt.Printf("%v", payload)
 
 	return menus, dto.CheckInfoPagination(paginate, count), err
 }

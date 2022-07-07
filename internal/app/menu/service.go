@@ -36,18 +36,6 @@ func (s *service) Find(ctx context.Context, payload *dto.SearchGetRequest) (*dto
 		return nil, res.ErrorBuilder(&res.ErrorConstant.InternalServerError, err)
 	}
 
-	// var datas []dto.UserResponse
-
-	// for _, user := range users {
-
-	// 	datas = append(datas, dto.UserResponse{
-	// 		ID:    user.ID,
-	// 		Name:  user.Name,
-	// 		Email: user.Email,
-	// 	})
-
-	// }
-
 	result := new(dto.SearchGetResponse[model.Menu])
 	result.Datas = Menus
 	result.PaginationInfo = *info
@@ -72,7 +60,7 @@ func (s *service) Create(ctx context.Context, payload *dto.CreateMenuRequest) (s
 
 	var menu = model.Menu{
 		Name:        payload.Name,
-		Stock:       payload.Stock,
+		InStock:     payload.Stock,
 		Description: payload.Description,
 	}
 

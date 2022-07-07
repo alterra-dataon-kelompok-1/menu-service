@@ -3,9 +3,9 @@ package database
 import (
 	"fmt"
 
-	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 type (
@@ -13,48 +13,50 @@ type (
 		Host string
 		User string
 		Pass string
-		Port string
+		Port int
 		Name string
 	}
 
-	mysqlConfig struct {
-		dbConfig
-	}
+	// mysqlConfig struct {
+	// 	dbConfig
+	// }
 
 	postgresqlConfig struct {
 		dbConfig
 	}
 )
 
-func (conf mysqlConfig) Connect() {
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
-		conf.User,
-		conf.Pass,
-		conf.Host,
-		conf.Port,
-		conf.Name,
-	)
+// func (conf mysqlConfig) Connect() {
+// 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
+// 		conf.User,
+// 		conf.Pass,
+// 		conf.Host,
+// 		conf.Port,
+// 		conf.Name,
+// 	)
 
-	var err error
+// 	var err error
 
-	dbConn, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	if err != nil {
-		panic(err)
-	}
-}
+// 	dbConn, err = gorm.Open(myssql.Open(dsn), &gorm.Config{})
+// 	if err != nil {
+// 		panic(err)
+// 	}
+// }
 
 func (conf postgresqlConfig) Connect() {
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Jakarta",
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%d sslmode=disable TimeZone=Asia/Jakarta",
+		conf.Host,
 		conf.User,
 		conf.Pass,
-		conf.Host,
-		conf.Port,
 		conf.Name,
+		conf.Port,
 	)
 
 	var err error
 
-	dbConn, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	dbConn, err = gorm.Open(postgres.Open(dsn), &gorm.Config{
+		Logger: logger.Default.LogMode(logger.Info),
+	})
 	if err != nil {
 		panic(err)
 	}

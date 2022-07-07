@@ -7,19 +7,11 @@ import (
 
 type Factory struct {
 	MenuRepository repository.Menu
-	UserRepository repository.Menu
 }
 
 func NewFactory() *Factory {
 	db := database.GetConnection()
 	return &Factory{
 		MenuRepository: repository.NewMenu(db),
-	}
-}
-
-func UserRepository() *Factory {
-	db := database.GetConnection()
-	return &Factory{
-		UserRepository: repository.NewMenu(db),
 	}
 }

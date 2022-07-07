@@ -1,7 +1,6 @@
 package database
 
 import (
-	"os"
 	"sync"
 
 	"gorm.io/gorm"
@@ -18,21 +17,21 @@ var (
 func CreateConnection() {
 
 	conf := dbConfig{
-		User: os.Getenv("DB_USER"),
-		Pass: os.Getenv("DB_PASS"),
-		Host: os.Getenv("DB_HOST"),
-		Port: os.Getenv("DB_PORT"),
-		Name: os.Getenv("DB_NAME"),
+		User: "postgres",
+		Pass: "08520852",
+		Host: "localhost",
+		Port: 5432,
+		Name: "cafetaria",
 	}
 
-	mysql := mysqlConfig{dbConfig: conf}
+	// mysql := mysqlConfig{dbConfig: conf}
 	// if you use postgres, you can uncomment code bellow
 
-	//postgres := postgresqlConfig{dbConfig: conf}
+	postgres := postgresqlConfig{dbConfig: conf}
 
 	once.Do(func() {
-		mysql.Connect()
-		//postgres.Connect()
+		// mysql.Connect()
+		postgres.Connect()
 	})
 }
 

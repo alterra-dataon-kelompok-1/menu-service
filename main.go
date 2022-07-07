@@ -30,7 +30,7 @@ func main() {
 		&m,
 		"migrate",
 		"run",
-		`this argument for check if user want to migrate table, rollback table, or status migration
+		`this argument for check if menu want to migrate table, rollback table, or status migration
 
 to use this flag:
 	use -migrate=migrate for migrate table
