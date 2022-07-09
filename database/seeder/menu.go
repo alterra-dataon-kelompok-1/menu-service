@@ -12,7 +12,7 @@ func menuTableSeeder(conn *gorm.DB) {
 	menu := []model.Menu{
 		{
 			ID:             uuid.New(),
-			MenuKategoriID: 2,
+			MenuCategoryID: 2,
 			Name:           "Mie goreng",
 			Description:    "Mie yang terbuat dari gandum, dan dimasak dengan cara digoreng",
 			ImageUrl:       "http://s3-ap-southeast-3.amazonaws.com/bucket/afa08a08a90s890",
@@ -21,7 +21,7 @@ func menuTableSeeder(conn *gorm.DB) {
 		},
 		{
 			ID:             uuid.New(),
-			MenuKategoriID: 1,
+			MenuCategoryID: 1,
 			Name:           "Nasi rebus",
 			Description:    "Nasi yang terbuat dari gabah, dan dimasak dengan cara direbus",
 			ImageUrl:       "http://s3-ap-southeast-3.amazonaws.com/bucket/nokrnoifgj09fuh90",
@@ -30,7 +30,7 @@ func menuTableSeeder(conn *gorm.DB) {
 		},
 		{
 			ID:             uuid.New(),
-			MenuKategoriID: 55,
+			MenuCategoryID: 55,
 			Name:           "Teriyaki",
 			Description:    "Ikan teri yang dibalur dengan saus rahasia",
 			ImageUrl:       "http://s3-ap-southeast-3.amazonaws.com/bucket/ikjfioejaia90fu0a9",
