@@ -17,21 +17,21 @@ var (
 func CreateConnection() {
 
 	conf := dbConfig{
-		User: "postgres",
+		User: "root",
 		Pass: "08520852",
 		Host: "localhost",
-		Port: 5432,
+		Port: 3306,
 		Name: "cafetaria",
 	}
 
-	// mysql := mysqlConfig{dbConfig: conf}
+	mysql := mysqlConfig{dbConfig: conf}
 	// if you use postgres, you can uncomment code bellow
 
-	postgres := postgresqlConfig{dbConfig: conf}
+	// postgres := postgresqlConfig{dbConfig: conf}
 
 	once.Do(func() {
-		// mysql.Connect()
-		postgres.Connect()
+		mysql.Connect()
+		// postgres.Connect()
 	})
 }
 

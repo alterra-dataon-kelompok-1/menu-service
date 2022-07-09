@@ -2,10 +2,12 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"os"
 
 	"github.com/alterra-kelompok-1/menu-service/database"
 	"github.com/alterra-kelompok-1/menu-service/database/migration"
+	"github.com/alterra-kelompok-1/menu-service/database/seeder"
 	"github.com/alterra-kelompok-1/menu-service/internal/factory"
 	"github.com/alterra-kelompok-1/menu-service/internal/http"
 	"github.com/alterra-kelompok-1/menu-service/internal/middleware"
@@ -49,6 +51,11 @@ to use this flag:
 		migration.Status()
 		return
 	}
+
+	// TEST
+	fmt.Println(database.GetConnection())
+
+	seeder.Seed()
 
 	f := factory.NewFactory()
 	e := echo.New()
