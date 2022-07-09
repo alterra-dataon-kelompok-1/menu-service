@@ -37,7 +37,7 @@ type PaginationInfo struct {
 }
 
 type ByIDRequest struct {
-	ID uint `param:"id" validate:"required"`
+	ID string `param:"id" validate:"required"`
 }
 
 func GetLimitOffset(p *Pagination) (limit, offset int) {

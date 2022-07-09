@@ -12,9 +12,9 @@ import (
 type Menu interface {
 	Create(ctx context.Context, data model.Menu) error
 	Find(ctx context.Context, payload *dto.SearchGetRequest, paginate *dto.Pagination) ([]model.Menu, *dto.PaginationInfo, error)
-	FindByID(ctx context.Context, ID uint) (model.Menu, error)
-	Update(ctx context.Context, ID uint, data map[string]interface{}) error
-	Delete(ctx context.Context, ID uint) error
+	FindByID(ctx context.Context, ID string) (model.Menu, error)
+	Update(ctx context.Context, ID string, data map[string]interface{}) error
+	Delete(ctx context.Context, ID string) error
 }
 
 type menu struct {
@@ -60,7 +60,7 @@ func (p *menu) Find(ctx context.Context, payload *dto.SearchGetRequest, paginate
 	return menus, dto.CheckInfoPagination(paginate, count), err
 }
 
-func (p *menu) FindByID(ctx context.Context, ID uint) (model.Menu, error) {
+func (p *menu) FindByID(ctx context.Context, ID string) (model.Menu, error) {
 
 	var data model.Menu
 	err := p.Db.WithContext(ctx).Model(&data).Where("id = ?", ID).First(&data).Error
@@ -68,7 +68,7 @@ func (p *menu) FindByID(ctx context.Context, ID uint) (model.Menu, error) {
 	return data, err
 }
 
-func (p *menu) Update(ctx context.Context, ID uint, data map[string]interface{}) error {
+func (p *menu) Update(ctx context.Context, ID string, data map[string]interface{}) error {
 
 	err := p.Db.WithContext(ctx).Where("id = ?", ID).Model(&model.Menu{}).Updates(data).Error
 	return err
@@ -89,7 +89,7 @@ func (p *menu) Update(ctx context.Context, ID uint, data map[string]interface{})
 	// return nil
 }
 
-func (p *menu) Delete(ctx context.Context, ID uint) error {
+func (p *menu) Delete(ctx context.Context, ID string) error {
 
 	err := p.Db.WithContext(ctx).Where("id = ?", ID).Delete(&model.Menu{}).Error
 	return err

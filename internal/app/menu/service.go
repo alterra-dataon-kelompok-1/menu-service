@@ -19,8 +19,8 @@ type Service interface {
 	Find(ctx context.Context, payload *dto.SearchGetRequest) (*dto.SearchGetResponse[model.Menu], error)
 	FindByID(ctx context.Context, payload *dto.ByIDRequest) (*model.Menu, error)
 	Create(ctx context.Context, payload *dto.CreateMenuRequest) (string, error)
-	Update(ctx context.Context, ID uint, payload *dto.UpdateMenuRequest) (string, error)
-	Delete(ctx context.Context, ID uint) (*model.Menu, error)
+	Update(ctx context.Context, ID string, payload *dto.UpdateMenuRequest) (string, error)
+	Delete(ctx context.Context, ID string) (*model.Menu, error)
 }
 
 func NewService(f *factory.Factory) Service {
@@ -72,7 +72,7 @@ func (s *service) Create(ctx context.Context, payload *dto.CreateMenuRequest) (s
 	return "success", nil
 }
 
-func (s *service) Update(ctx context.Context, ID uint, payload *dto.UpdateMenuRequest) (string, error) {
+func (s *service) Update(ctx context.Context, ID string, payload *dto.UpdateMenuRequest) (string, error) {
 
 	var data = make(map[string]interface{})
 
@@ -94,7 +94,7 @@ func (s *service) Update(ctx context.Context, ID uint, payload *dto.UpdateMenuRe
 	return "success", nil
 }
 
-func (s *service) Delete(ctx context.Context, ID uint) (*model.Menu, error) {
+func (s *service) Delete(ctx context.Context, ID string) (*model.Menu, error) {
 
 	data, err := s.MenuRepository.FindByID(ctx, ID)
 	if err != nil {

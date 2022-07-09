@@ -2,7 +2,6 @@ package menu
 
 import (
 	"fmt"
-	"strconv"
 
 	"github.com/alterra-kelompok-1/menu-service/internal/dto"
 	"github.com/alterra-kelompok-1/menu-service/internal/factory"
@@ -91,11 +90,11 @@ func (h *handler) Update(c echo.Context) error {
 		return response.Send(c)
 	}
 
-	strID := c.Param("id")
-	ID, err := strconv.Atoi(strID)
-	if err != nil {
-		return res.ErrorBuilder(&res.ErrorConstant.BadRequest, err).Send(c)
-	}
+	ID := c.Param("id")
+	// ID, err := strconv.Atoi(strID)
+	// if err != nil {
+	// 	return res.ErrorBuilder(&res.ErrorConstant.BadRequest, err).Send(c)
+	// }
 
 	// param := new(dto.ByIDRequest)
 	// if err := c.Bind(param); err != nil {
@@ -107,7 +106,7 @@ func (h *handler) Update(c echo.Context) error {
 	// 	return response.Send(c)
 	// }
 
-	result, err := h.service.Update(c.Request().Context(), uint(ID), payload)
+	result, err := h.service.Update(c.Request().Context(), ID, payload)
 	if err != nil {
 		return res.ErrorResponse(err).Send(c)
 	}
