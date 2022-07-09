@@ -24,7 +24,7 @@ type SearchGetResponse[T any] struct {
 
 type SearchGetMenuResponse struct {
 	Name        string    `json:"name"`
-	InStock     bool      `json:"in_stock"`
+	InStock     int64     `json:"in_stock"`
 	Description string    `json:"description"`
 	UpdatedAt   time.Time `json:"updated_at"`
 }
@@ -37,7 +37,7 @@ type PaginationInfo struct {
 }
 
 type ByIDRequest struct {
-	ID string `param:"id" validate:"required"`
+	ID string `param:"id" validation:"required"`
 }
 
 func GetLimitOffset(p *Pagination) (limit, offset int) {

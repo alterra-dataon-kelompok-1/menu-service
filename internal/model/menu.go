@@ -3,7 +3,7 @@ package model
 import "github.com/google/uuid"
 
 type Menu struct {
-	ID             uuid.UUID `json:"id" gorm:"primarykey;autoIncrement"`
+	ID             uuid.UUID `json:"id" gorm:"primaryKey"`
 	MenuCategoryID int       `json:"menu_category_id" gorm:"not null"`
 	Name           string    `json:"name" gorm:"size:200;unique;not null"`
 	Description    string    `json:"description" gorm:"not null"`

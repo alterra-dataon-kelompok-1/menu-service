@@ -9,6 +9,7 @@ import (
 	"github.com/alterra-kelompok-1/menu-service/internal/repository"
 	"github.com/alterra-kelompok-1/menu-service/pkg/constant"
 	res "github.com/alterra-kelompok-1/menu-service/pkg/util/response"
+	"github.com/google/uuid"
 )
 
 type service struct {
@@ -59,11 +60,16 @@ func (s *service) FindByID(ctx context.Context, payload *dto.ByIDRequest) (*mode
 func (s *service) Create(ctx context.Context, payload *dto.CreateMenuRequest) (string, error) {
 
 	var menu = model.Menu{
-		Name:        payload.Name,
-		InStock:     payload.Stock,
-		Description: payload.Description,
+		ID:             payload.ID,
+		MenuCategoryID: payload.MenuCategoryID,
+		Name:           payload.Name,
+		Description:    payload.Description,
+		ImageUrl:       payload.ImageUrl,
+		Price:          payload.Price,
+		InStock:        payload.InStock,
 	}
 
+	menu.ID = uuid.New()
 	err := s.MenuRepository.Create(ctx, menu)
 	if err != nil {
 		return "", res.ErrorBuilder(&res.ErrorConstant.InternalServerError, err)
@@ -76,14 +82,20 @@ func (s *service) Update(ctx context.Context, ID string, payload *dto.UpdateMenu
 
 	var data = make(map[string]interface{})
 
+	if payload.MenuCategoryID != nil {
+		data["menu_category_id"] = payload.MenuCategoryID
+	}
 	if payload.Name != nil {
 		data["name"] = payload.Name
 	}
-	if payload.Stock != nil {
-		data["stock"] = payload.Stock
-	}
 	if payload.Description != nil {
 		data["description"] = payload.Description
+	}
+	if payload.ImageUrl != nil {
+		data["image_url"] = payload.ImageUrl
+	}
+	if payload.InStock != nil {
+		data["in_stock"] = payload.InStock
 	}
 
 	err := s.MenuRepository.Update(ctx, ID, data)
