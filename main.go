@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/alterra-kelompok-1/menu-service/config"
 	"github.com/alterra-kelompok-1/menu-service/database"
 	"github.com/alterra-kelompok-1/menu-service/database/migration"
 	"github.com/alterra-kelompok-1/menu-service/internal/factory"
@@ -22,8 +23,9 @@ func init() {
 }
 
 func main() {
+	config := config.New(".env")
 
-	database.CreateConnection()
+	database.CreateConnection(config)
 
 	var m string // for check migration
 

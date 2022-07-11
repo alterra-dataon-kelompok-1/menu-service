@@ -7,6 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/alterra-kelompok-1/menu-service/config"
 	"github.com/alterra-kelompok-1/menu-service/database"
 	"github.com/alterra-kelompok-1/menu-service/database/migration"
 	"github.com/alterra-kelompok-1/menu-service/database/seeder"
@@ -19,7 +20,8 @@ import (
 )
 
 func createTestApp() (*echo.Echo, *gorm.DB, handler) {
-	database.CreateConnection()
+	config := config.New()
+	database.CreateConnection(config)
 	migration.Migrate()
 	seeder.Seed()
 

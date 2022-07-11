@@ -1,8 +1,10 @@
 package database
 
 import (
+	"strconv"
 	"sync"
 
+	"github.com/alterra-kelompok-1/menu-service/config"
 	"gorm.io/gorm"
 )
 
@@ -14,14 +16,22 @@ var (
 
 // CreateConnection is a function for creating new connection with database
 // you can choose you want use mysql or postgresql
-func CreateConnection() {
+func CreateConnection(cfg config.Config) {
+	p, _ := strconv.Atoi(cfg.Get("DB_PORT"))
 
+	// conf := dbConfig{
+	// 	User: "root",
+	// 	Pass: "08520852",
+	// 	Host: "localhost",
+	// 	Port: 3306,
+	// 	Name: "cafetaria",
+	// }
 	conf := dbConfig{
-		User: "root",
-		Pass: "08520852",
-		Host: "localhost",
-		Port: 3306,
-		Name: "cafetaria",
+		User: cfg.Get("DB_USER"),
+		Pass: cfg.Get("DB_PASS"),
+		Host: cfg.Get("DB_URL"),
+		Port: p,
+		Name: cfg.Get("DB_NAME"),
 	}
 
 	mysql := mysqlConfig{dbConfig: conf}
@@ -38,8 +48,8 @@ func CreateConnection() {
 // GetConnection is a faction for return connection or return value dbConn
 // because we set var dbConn is private
 func GetConnection() *gorm.DB {
-	if dbConn == nil {
-		CreateConnection()
-	}
+	// if dbConn == nil {
+	// 	CreateConnection()
+	// }
 	return dbConn
 }
