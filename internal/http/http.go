@@ -7,5 +7,5 @@ import (
 )
 
 func NewHttp(e *echo.Echo, f *factory.Factory) {
-	menu.NewHandler(f).Route(e.Group("/menus"))
+	menu.NewHandler(f).Route(e.Group("/v1/menus"))
 }
