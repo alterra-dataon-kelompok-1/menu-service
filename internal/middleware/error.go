@@ -3,7 +3,7 @@ package middleware
 import (
 	"net/http"
 
-	res "github.com/alterra-kelompok-1/menu-service/pkg/util/response"
+	res "github.com/alterra-kelompok-1/menu-service/pkg/utils/response"
 
 	"github.com/labstack/echo/v4"
 )

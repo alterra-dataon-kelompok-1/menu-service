@@ -8,7 +8,7 @@ import (
 	"github.com/alterra-kelompok-1/menu-service/internal/model"
 	"github.com/alterra-kelompok-1/menu-service/internal/repository"
 	"github.com/alterra-kelompok-1/menu-service/pkg/constant"
-	res "github.com/alterra-kelompok-1/menu-service/pkg/util/response"
+	res "github.com/alterra-kelompok-1/menu-service/pkg/utils/response"
 	"github.com/google/uuid"
 )
 

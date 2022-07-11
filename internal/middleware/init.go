@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/alterra-kelompok-1/menu-service/pkg/util/validator"
+	"github.com/alterra-kelompok-1/menu-service/pkg/utils/validator"
 	"github.com/labstack/echo/v4"
 	echoMiddleware "github.com/labstack/echo/v4/middleware"
 )
