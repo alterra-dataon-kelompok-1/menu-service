@@ -7,7 +7,7 @@ type CreateMenuRequest struct {
 	MenuCategoryID int       `json:"menu_category_id" gorm:"not null" validation:"required"`
 	Name           string    `json:"name" validation:"required"`
 	Description    string    `json:"description" validation:"required"`
-	ImageUrl       string    `json:"image_url" gorm:"not null" validation:"required"`
+	ImageUrl       string    `json:"image_url" gorm:"not null"`
 	Price          float64   `json:"price" gorm:"not null" validation:"required"`
 	InStock        int64     `json:"in_stock" validation:"required"`
 }
