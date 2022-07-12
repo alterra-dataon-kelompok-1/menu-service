@@ -19,7 +19,7 @@ jobs:
         password: ${{secrets.DOCKER_HUB_PASSWORD}}
         
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag dimasabiyoga/order-service:latest
+      run: docker build . --file Dockerfile --tag arsyaprasamya/menu-service:latest
       
     - name: docker push
-      run: docker push dimasabiyoga/order-service:latest
+      run: docker push arsyaprasamya/menu-service:latest
